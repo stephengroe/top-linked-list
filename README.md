@@ -27,7 +27,8 @@ Each linked list module includes these methods:
 * `getSize()` - Returns the number of nodes in the list
 * `getHead()` - Returns the value of the first node
 * `getTail()` - Returns the value of the last node
-* `getNode(index)` - Returns the value of the node at the specified index
+* `findByIndex(index)` - Returns the value of the node at the specified index
+* `findByValue(value)` - Returns the index of the node at the specified value
 * `contains(value)` - Returns whether a node exists with a value
 
 ### DOM visualization

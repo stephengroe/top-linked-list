@@ -25,15 +25,18 @@ function createLinkedList(name) {
       const tail = document.createElement("li");
       tail.textContent = `Tail: ${this.getTail()}`;
 
-      const index = document.createElement("li");
-      const randomIndex = Math.round(Math.random() * (this.getSize() - 1));
-      index.textContent = `At index [${randomIndex}]: ${this.getNode(randomIndex)}`;
+      const findByIndex = document.createElement("li");
+      const randomIndex = Math.ceil(Math.random() * (this.getSize() - 1));
+      findByIndex.textContent = `At index [${randomIndex}]: '${this.findByIndex(randomIndex)}'`;
 
       const contains = document.createElement("li");
-      const randomNumber = Math.round(Math.random() * 10000).toString();
-      contains.textContent = this.contains(randomNumber);
+      const randomValue = Math.round(Math.random() * 10000).toString();
+      contains.textContent = `Contains '${randomValue}'? ${this.contains(randomValue)}`;
+
+      const findByValue = document.createElement("li");
+      findByValue.textContent = `Index of '${randomValue}': [${this.findByValue(randomValue)}]`;
       
-      data.append(size, head, tail, index, contains);
+      data.append(size, head, tail, findByIndex, contains, findByValue);
 
       const prependButton = document.createElement("button");
       prependButton.textContent = "Prepend new node";
@@ -107,6 +110,10 @@ function createLinkedList(name) {
     popNode() {
       let next = this.head;
       if (next === null) return;
+      if (next.nextNode === null) {
+        this.head = null;
+        return;
+      }
       while (next.nextNode.nextNode !== null) {
         next = next.nextNode;
       }
@@ -115,6 +122,14 @@ function createLinkedList(name) {
 
     insertNodeAt(value, index) {
       let next = this.head;
+      if (next === null) {
+        if (index === 0) {
+          this.head = createNode(value, null);
+          return;
+        } else {
+          return;
+        }
+      } 
       for (let i=0; i<index-1; i++) {
         next = next.nextNode;
       }
@@ -124,6 +139,11 @@ function createLinkedList(name) {
 
     removeNodeAt(index) {
       let next = this.head;
+      if (next === null) return;
+      if (index === 0) {
+        this.head = this.head.nextNode;
+        return;
+      }
       for (let i=0; i<index-1; i++) {
         next = next.nextNode;
       }
@@ -159,7 +179,17 @@ function createLinkedList(name) {
       return next.value;
     },
 
-    getNode(index) {
+    contains(searchValue) {
+      let next = this.head;
+      if (next === null) return false;
+      while (next !== null) {
+        if (next.value === searchValue) return true;
+        next = next.nextNode;
+      }
+      return false;
+    },
+
+    findByIndex(index) {
       let next = this.head;
       for (let i=0; i<index; i++) {
         next = next.nextNode;
@@ -168,17 +198,17 @@ function createLinkedList(name) {
       return next.value || null;
     },
 
-    contains(searchValue) {
+    findByValue(searchValue) {
       let index = 0;
       let next = this.head;
-      if (next !== null) {
-        while (next !== null) {
-          if (next.value === searchValue) return `Contains ${searchValue} at [${index}]`;
-          next = next.nextNode;
-          index += 1;
-        }
+      if (next === null) return -1;
+      while (next !== null) {
+        if (next.value === searchValue) return index;
+        next = next.nextNode;
+        index += 1;
       }
-      return `Doesn't contain ${searchValue}`
+      return -1;
+
     },
   }
 }
