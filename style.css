@@ -5,7 +5,12 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 1.5em;
+}
+
+#new-list-button {
+  margin: 1rem auto;
+  display: block;
+  font-size: 1.25rem;
 }
 
 #wrapper {
@@ -40,4 +45,9 @@ h1 {
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
+}
+
+.button-div {
+  text-align: center;
+  margin-bottom: 1em;
 }

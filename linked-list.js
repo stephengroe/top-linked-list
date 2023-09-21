@@ -38,6 +38,9 @@ function createLinkedList(name) {
       
       data.append(size, head, tail, findByIndex, contains, findByValue);
 
+      const buttonDiv = document.createElement("div");
+      buttonDiv.setAttribute("class", "button-div");
+
       const prependButton = document.createElement("button");
       prependButton.textContent = "Prepend new node";
       prependButton.addEventListener("click", () => {
@@ -73,7 +76,8 @@ function createLinkedList(name) {
         this.render();
       })
 
-      container.append(name, data, prependButton, appendAtButton, appendButton, popButton, removeAtButton);
+      buttonDiv.append(prependButton, appendAtButton, appendButton, popButton, removeAtButton)
+      container.append(name, data, buttonDiv);
 
       // Add all nodes
       let next = this.head;
