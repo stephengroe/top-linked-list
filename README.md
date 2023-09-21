@@ -1,5 +1,7 @@
 # Linked List
 
+![Demo screenshot](screenshot.png)
+
 **Interactive page demonstrating linked lists**
 
 Create an unlimited number of linked lists and perform basic CRUD (create, read, update, delete) operations on each list.
