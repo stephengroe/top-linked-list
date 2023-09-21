@@ -85,9 +85,15 @@ function createLinkedList(name) {
       while (next !== null) {
         const childNode = document.createElement("div");
         childNode.setAttribute("class", "child-node");
-        childNode.textContent = `[${counter}] ${next.value}`;
-
+        childNode.textContent = `${next.value}`;
         container.append(childNode);
+
+        if (next.nextNode !== null) {
+          const arrow = document.createElement("div");
+          arrow.textContent = "↓";
+          container.append(arrow);
+        }
+
         next = next.nextNode;
         counter += 1;
       };
