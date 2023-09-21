@@ -27,7 +27,7 @@ function createLinkedList(name) {
 
       const index = document.createElement("li");
       const randomIndex = Math.round(Math.random() * (this.getSize() - 1));
-      index.textContent = `At index [${randomIndex}]: ${this.getItem(randomIndex)}`;
+      index.textContent = `At index [${randomIndex}]: ${this.getNode(randomIndex)}`;
 
       const contains = document.createElement("li");
       const randomNumber = Math.round(Math.random() * 10000).toString();
@@ -45,7 +45,7 @@ function createLinkedList(name) {
       const appendAtButton = document.createElement("button");
       appendAtButton.textContent = `Append node at [${randomIndex}]`;
       appendAtButton.addEventListener("click", () => {
-        this.appendNodeAt(Date.now().toString().slice(-4), randomIndex);
+        this.insertNodeAt(Date.now().toString().slice(-4), randomIndex);
         this.render();
       })
 
@@ -113,7 +113,7 @@ function createLinkedList(name) {
       next.nextNode = null;
     },
 
-    appendNodeAt(value, index) {
+    insertNodeAt(value, index) {
       let next = this.head;
       for (let i=0; i<index-1; i++) {
         next = next.nextNode;
@@ -159,7 +159,7 @@ function createLinkedList(name) {
       return next.value;
     },
 
-    getItem(index) {
+    getNode(index) {
       let next = this.head;
       for (let i=0; i<index; i++) {
         next = next.nextNode;
